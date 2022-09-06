@@ -1,10 +1,16 @@
+using System;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
     [SerializeField] private float _speed = 8f;
     [SerializeField] private float _jumpForce =  200f;
+    private Vector3 _startPosition;
 
+    void Start()
+    {
+        _startPosition = transform.position;
+    }
     void Update()
     {
         var horizontal = Input.GetAxis("Horizontal") * _speed;
@@ -27,5 +33,9 @@ public class Player : MonoBehaviour
         {
             rigidbody2D.AddForce(Vector2.up * _jumpForce);
         }
+    }
+    internal void ResetToStart()
+    {
+        transform.position = _startPosition;
     }
 }
