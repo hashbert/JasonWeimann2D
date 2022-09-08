@@ -49,7 +49,7 @@ public class Player : MonoBehaviour
             _fallTimer = 0;
             _jumpTimer = 0;
         }
-        else if (Input.GetButtonDown("Fire1") && _jumpTimer <= _maxJumpDuration)
+        else if (Input.GetButton("Fire1") && _jumpTimer <= _maxJumpDuration)
         {
             rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, _jumpVelocity);
             _fallTimer = 0;
