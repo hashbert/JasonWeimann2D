@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Flag : MonoBehaviour
 {
+    [SerializeField] private string _sceneName;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         var player = collision.GetComponent<Player>();
@@ -11,8 +13,7 @@ public class Flag : MonoBehaviour
 
         var animator = GetComponent<Animator>();
         animator.SetTrigger("Raise");
-
-        //play flag wave
         //load new level
+        SceneManager.LoadScene(_sceneName);
     }
 }
