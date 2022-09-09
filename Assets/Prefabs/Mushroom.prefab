@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7866121652719461918}
   - component: {fileID: 7866121652719461919}
+  - component: {fileID: 7815583293058388821}
   - component: {fileID: 7866121652719461920}
   - component: {fileID: 7866121652719461921}
   m_Layer: 0
@@ -86,6 +87,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7815583293058388821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7866121652719461922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e316762f917ff74cae0e5d2a5ac5e8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bounceVelocity: 10
 --- !u!61 &7866121652719461920
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -95,7 +109,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 7866121652719461922}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 6c8366034a55dee45a37b3011ffba284, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 1
   m_UsedByComposite: 0
