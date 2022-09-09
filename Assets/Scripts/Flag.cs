@@ -13,7 +13,12 @@ public class Flag : MonoBehaviour
 
         var animator = GetComponent<Animator>();
         animator.SetTrigger("Raise");
-        //load new level
-        SceneManager.LoadScene(_sceneName);
+        StartCoroutine(LoadAfterDelay());
     }
+
+    private IEnumerator LoadAfterDelay()
+    {
+        yield return new WaitForSeconds(1.5f);
+        SceneManager.LoadScene(_sceneName);
+    } 
 }
