@@ -2,7 +2,10 @@ using System;
 using UnityEngine;
 public class Player : MonoBehaviour
 {
+    [Header("Movement")]
     [SerializeField] private float _speed = 1f;
+    [SerializeField] private float _slipFactor = 1;
+    [Header("Jump")]
     [SerializeField] private float _jumpVelocity = 10f;
     [SerializeField] private int _maxJumps = 2;
     [SerializeField] private Transform _feet;
@@ -18,6 +21,7 @@ public class Player : MonoBehaviour
     private Animator _animator;
     private float _horizontal;
     private bool _isGrounded;
+    private bool _isOnSlipperySurface;
 
     void Start()
     {
@@ -31,7 +35,14 @@ public class Player : MonoBehaviour
     {
         UpdateIsGrounded();
         ReadHorizontalInput();
-        MoveHorizontal();
+        if (_isOnSlipperySurface)
+        {
+            SlipHorizontal();
+        }
+        else
+        {
+            MoveHorizontal();
+        }
 
         UpdateAnimator();
         UpdateSpriteDirection();
@@ -83,10 +94,17 @@ public class Player : MonoBehaviour
 
     private void MoveHorizontal()
     {
-        if (Mathf.Abs(_horizontal) >= 1)
-        {
-            _rigidbody2D.velocity = new Vector2(_horizontal, _rigidbody2D.velocity.y);
-        }
+        _rigidbody2D.velocity = new Vector2(_horizontal * _speed, _rigidbody2D.velocity.y);
+    }
+
+    private void SlipHorizontal()
+    {
+        var desiredVelocity = new Vector2(_horizontal * _speed, _rigidbody2D.velocity.y);
+        var smoothedVelocity = Vector2.Lerp(
+            _rigidbody2D.velocity,
+            desiredVelocity,
+            Time.deltaTime / _slipFactor);
+        _rigidbody2D.velocity = smoothedVelocity;
     }
 
     private void ReadHorizontalInput()
@@ -112,6 +130,17 @@ public class Player : MonoBehaviour
     {
         var hit = Physics2D.OverlapCircle(_feet.position, 0.1f, LayerMask.GetMask("Default"));
         _isGrounded = hit != null;
+
+
+        if (hit != null)
+        {
+            _isOnSlipperySurface = hit.CompareTag("Slippery");
+        }
+        else
+        {
+            _isOnSlipperySurface = false;
+        }
+        //_isOnSlipperySurface = hit?.CompareTag("Slippery") ?? false;   is same code as above
     }
 
     internal void ResetToStart()
