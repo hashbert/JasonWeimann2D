@@ -32,8 +32,6 @@ public class Slime : MonoBehaviour
         {
             ScanSensor(_rightSensor);
         }
-
-
     }
 
     private void ScanSensor(Transform sensor)
@@ -72,6 +70,21 @@ public class Slime : MonoBehaviour
         var player = collision.collider.GetComponent<Player>();
         if (player == null)
             return;
-        player.ResetToStart();
+
+        var contact = collision.contacts[0];
+        var normal = contact.normal;
+
+        print(normal);
+        if (normal.y < -0.6f)
+        {
+            Die();
+        }
+        else
+            player.ResetToStart();
+
+    }
+    private void Die()
+    {
+        Destroy(gameObject);
     }
 }
