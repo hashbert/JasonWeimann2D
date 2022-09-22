@@ -26,25 +26,31 @@ public class Slime : MonoBehaviour
 
         if (_direction < 0f)
         {
-            Debug.DrawRay(_leftSensor.position, Vector2.down * .1f, Color.red);
-            var leftResult = Physics2D.Raycast(_leftSensor.position, Vector2.down, 0.1f);
-            if (leftResult.collider == null)
-            {
-                TurnAround();
-            }
+            ScanSensor(_leftSensor);
         }
-        else if (_direction > 0f)
+        else
         {
-            Debug.DrawRay(_rightSensor.position, Vector2.down * .1f, Color.red);
-            var rightResult = Physics2D.Raycast(_rightSensor.position, Vector2.down, 0.1f);
-
-            if (rightResult.collider == null)
-            {
-                TurnAround();
-            }
+            ScanSensor(_rightSensor);
         }
 
 
+    }
+
+    private void ScanSensor(Transform sensor)
+    {
+        Debug.DrawRay(sensor.position, Vector2.down * .1f, Color.red);
+        var result = Physics2D.Raycast(sensor.position, Vector2.down, 0.1f);
+        if (result.collider == null)
+        {
+            TurnAround();
+        }
+
+        Debug.DrawRay(sensor.position, new Vector2(_direction, 0) * .1f, Color.red);
+        var sideResult = Physics2D.Raycast(sensor.position, new Vector2(_direction, 0), 0.1f);
+        if (sideResult.collider != null)
+        {
+            TurnAround();
+        }
     }
 
     private void TurnAround()
@@ -63,7 +69,7 @@ public class Slime : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        var player = collision.gameObject.GetComponent<Player>();
+        var player = collision.collider.GetComponent<Player>();
         if (player == null)
             return;
         player.ResetToStart();
