@@ -941,7 +941,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_LocalRotation: {x: -0.036629617, y: -0.02652835, z: -0.00097271893, w: 0.9989763}
+  m_LocalRotation: {x: -0.036629617, y: -0.026528355, z: -0.0009727191, w: 0.9989763}
   m_LocalPosition: {x: 7.9664855, y: 4.0296326, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2980,7 +2980,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1862536944}
-  m_LocalRotation: {x: -0.036629617, y: -0.02652835, z: -0.00097271893, w: 0.9989763}
+  m_LocalRotation: {x: -0.036629617, y: -0.026528355, z: -0.0009727191, w: 0.9989763}
   m_LocalPosition: {x: 7.9664855, y: 4.0296326, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3256,6 +3256,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _leftSensor: {fileID: 1744005173}
   _rightSensor: {fileID: 1989480332}
+  _deadSprite: {fileID: 21300000, guid: b9dc96b4cd981f440a536eaa361cfed3, type: 3}
 --- !u!95 &2070967557
 Animator:
   serializedVersion: 4
