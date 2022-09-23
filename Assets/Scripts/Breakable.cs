@@ -10,7 +10,11 @@ public class Breakable : MonoBehaviour
             return;
         if (collision.contacts[0].normal.y > 0)
         {
-            gameObject.SetActive(false);
+            var particleSystem = GetComponent<ParticleSystem>();
+            particleSystem.Play();
+
+            GetComponent<SpriteRenderer>().enabled = false;
+            GetComponent<Collider2D>().enabled = false;
         }
     }
 }
