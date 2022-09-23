@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform _feet;
     [SerializeField] private float _downPull = 5f;
     [SerializeField] private float _maxJumpDuration = 0.1f;
+    [SerializeField] private int _playerNumber;
 
     private Vector3 _startPosition;
     private int _jumpsRemaining;
@@ -75,7 +76,7 @@ public class Player : MonoBehaviour
 
     private bool ShouldContinueJump()
     {
-        return Input.GetButton("Fire1") && _jumpTimer <= _maxJumpDuration;
+        return Input.GetButton($"P{_playerNumber}Jump") && _jumpTimer <= _maxJumpDuration;
     }
 
     private void Jump()
@@ -89,7 +90,7 @@ public class Player : MonoBehaviour
 
     private bool ShouldStartJump()
     {
-        return Input.GetButtonDown("Fire1") && _jumpsRemaining > 0;
+        return Input.GetButtonDown($"P{_playerNumber}Jump") && _jumpsRemaining > 0;
     }
 
     private void MoveHorizontal()
@@ -109,7 +110,7 @@ public class Player : MonoBehaviour
 
     private void ReadHorizontalInput()
     {
-        _horizontal = Input.GetAxis("Horizontal") * _speed;
+        _horizontal = Input.GetAxis($"P{_playerNumber}Horizontal") * _speed;
     }
 
     private void UpdateSpriteDirection()
