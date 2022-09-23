@@ -24,6 +24,9 @@ public class Player : MonoBehaviour
     private bool _isGrounded;
     private bool _isOnSlipperySurface;
 
+    public int PlayerNumber => _playerNumber;
+    //public int PlayerNumber { get { return _playerNumber; } } exact same as above
+
     void Start()
     {
         _startPosition = transform.position;
