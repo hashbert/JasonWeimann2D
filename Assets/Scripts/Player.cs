@@ -24,6 +24,7 @@ public class Player : MonoBehaviour
     private bool _isGrounded;
     private bool _isOnSlipperySurface;
 
+
     public int PlayerNumber => _playerNumber;
     //public int PlayerNumber { get { return _playerNumber; } } exact same as above
 
@@ -147,9 +148,13 @@ public class Player : MonoBehaviour
         }
         //_isOnSlipperySurface = hit?.CompareTag("Slippery") ?? false;   is same code as above
     }
-
     internal void ResetToStart()
     {
-        transform.position = _startPosition;
+        _rigidbody2D.position = _startPosition;
+    }
+    internal void TeleportTo(Vector3 position)
+    {
+        _rigidbody2D.position = position;
+        _rigidbody2D.velocity = Vector2.zero;
     }
 }
