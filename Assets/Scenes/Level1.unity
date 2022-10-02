@@ -2472,6 +2472,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerInside: 0
   _fallSpeed: 9
+  _fallAfterSeconds: 3
+  _shakeX: 0.005
+  _shakeY: 0.005
 --- !u!61 &789926665
 BoxCollider2D:
   m_ObjectHideFlags: 0

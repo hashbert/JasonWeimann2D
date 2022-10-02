@@ -9,8 +9,14 @@ public class FallingPlatform : MonoBehaviour
 
     private HashSet<Player> _playersInTrigger = new HashSet<Player>();
     private Vector3 _initialPosition;
-    [SerializeField] private float _fallSpeed = 1f;
     private bool _falling;
+    [Tooltip("Resets the wiggle timer when no players are on the platform")]
+    [SerializeField] private bool _resetOnEmpty;
+    [SerializeField] private float _fallSpeed = 9f;
+    [Range(0.1f, 5f)] [SerializeField] private float _fallAfterSeconds = 3f;
+    [Range(0.005f, .1f)] [SerializeField] private float _shakeX = .005f;
+    [Range(0.005f, .1f)] [SerializeField] private float _shakeY = .005f;
+    private float _wiggleTimer;
 
     private void Start()
     {
@@ -34,15 +40,15 @@ public class FallingPlatform : MonoBehaviour
     {
         print("waiting to wiggle");
         yield return new WaitForSeconds(.25f);
-        float wiggleTimer = 0f;
-        while (wiggleTimer < 1f)
+        //_wiggleTimer = 0f;
+        while (_wiggleTimer < _fallAfterSeconds)
         {
-            float randomX = UnityEngine.Random.Range(-.05f, 0.05f);
-            float randomY = UnityEngine.Random.Range(-.05f, 0.05f);
+            float randomX = UnityEngine.Random.Range(-_shakeX, _shakeX);
+            float randomY = UnityEngine.Random.Range(-_shakeY, _shakeY);
             transform.position = _initialPosition + new Vector3(randomX, randomY);
             float randomDelay = UnityEngine.Random.Range(.005f, .01f);
             yield return new WaitForSeconds(randomDelay);
-            wiggleTimer += randomDelay;
+            _wiggleTimer += randomDelay;
         }
         print("falling");
         _falling = true;
@@ -75,6 +81,11 @@ public class FallingPlatform : MonoBehaviour
         {
             PlayerInside = false;
             StopCoroutine(WiggleAndFall());
+
+            if (_resetOnEmpty)
+            {
+                _wiggleTimer = 0;
+            }
         }
     }
 }
