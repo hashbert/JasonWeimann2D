@@ -18,5 +18,6 @@ public class Collector : MonoBehaviour
         {
             if (collectible.isActiveAndEnabled) return;
         }
+        print("got all the items"); 
     }
 }
