@@ -1,7 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Collectible: MonoBehaviour
 {
+    public static event Action<Collectible> OnPickedUp;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         var player = collision.GetComponent<Player>();
@@ -10,5 +12,6 @@ public class Collectible: MonoBehaviour
             return;
         }
         gameObject.SetActive(false);
+        OnPickedUp?.Invoke(this);
     }
 }
