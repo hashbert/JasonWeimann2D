@@ -15,27 +15,17 @@ public class ItemBox : HittableFromBelow
             _item.SetActive(false);
         }
     }
+    protected override bool CanUse => _used == false && _item != null;
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    protected override void Use()
     {
-        if (_used) return;
-
-        var player = collision.collider.GetComponent<Player>();
-        if (!player) { return; }
-
-        if (collision.contacts[0].normal.y > 0)
+        base.Use();
+        _used = true;
+        _item.SetActive(true);
+        var itemRigidbody = _item.GetComponent<Rigidbody2D>();
+        if (itemRigidbody != null)
         {
-            GetComponent<SpriteRenderer>().sprite = _usedSprite;
-            if (_item != null)
-            {
-                _used = true;
-                _item.SetActive(true);
-                var itemRigidbody = _item.GetComponent<Rigidbody2D>();
-                if (itemRigidbody != null)
-                {
-                    itemRigidbody.velocity = _itemLaunchVelocity;
-                }
-            }
+            itemRigidbody.velocity = _itemLaunchVelocity;
         }
     }
 }

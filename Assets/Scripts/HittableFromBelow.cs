@@ -9,6 +9,7 @@ public class HittableFromBelow: MonoBehaviour
     //protected virtual bool CanUse { get;  } = true; (same as above)
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (CanUse==false) return;
         var player = collision.collider.GetComponent<Player>();
         if (!player) { return; }
 
