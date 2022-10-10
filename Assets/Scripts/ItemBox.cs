@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemBox : MonoBehaviour
+public class ItemBox : HittableFromBelow
 {
-    [SerializeField] private Sprite _usedSprite;
     [SerializeField] private GameObject _item;
     [SerializeField] private Vector3 _itemLaunchVelocity;
     private bool _used;
@@ -20,6 +19,7 @@ public class ItemBox : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (_used) return;
+
         var player = collision.collider.GetComponent<Player>();
         if (!player) { return; }
 
