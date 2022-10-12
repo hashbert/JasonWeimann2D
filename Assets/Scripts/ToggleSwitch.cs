@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,10 +8,20 @@ public class ToggleSwitch : MonoBehaviour
 {
     [SerializeField] private Sprite _leftSwitch;
     [SerializeField] private Sprite _rightSwitch;
+    private Sprite _centerSwitch;
     [SerializeField] private UnityEvent _onLeftSwitchPressed;
     [SerializeField] private UnityEvent _onRightSwitchPressed;
+    private UnityEvent _onCenterSwitchPressed;
     private SpriteRenderer _spriteRenderer;
     private float _xPositionOfSwitch;
+    private ToggleDirection _currentDirection;
+
+    private enum ToggleDirection
+    {
+        Left,
+        Center,
+        Right,
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -25,13 +36,38 @@ public class ToggleSwitch : MonoBehaviour
         if (player == null) return;
         if (player.transform.position.x > _xPositionOfSwitch)
         {
-            _spriteRenderer.sprite = _leftSwitch;
-            _onLeftSwitchPressed.Invoke();
+            SetToggleDirection(ToggleDirection.Left);
+
         }
         if (player.transform.position.x < _xPositionOfSwitch)
         {
-            _spriteRenderer.sprite = _rightSwitch;
-            _onRightSwitchPressed.Invoke();
+            SetToggleDirection(ToggleDirection.Right);
+
+        }
+    }
+
+    private void SetToggleDirection(ToggleDirection direction)
+    {
+        if (_currentDirection == direction) return;
+
+        _currentDirection = direction;
+
+        switch (direction)
+        {
+            case ToggleDirection.Left:
+                _spriteRenderer.sprite = _leftSwitch;
+                _onLeftSwitchPressed.Invoke();
+                break;
+            case ToggleDirection.Center:
+                _spriteRenderer.sprite = _centerSwitch;
+                _onCenterSwitchPressed.Invoke();
+                break;
+            case ToggleDirection.Right:
+                _spriteRenderer.sprite = _rightSwitch;
+                _onRightSwitchPressed.Invoke();
+                break;
+            default:
+                break;
         }
     }
 }
