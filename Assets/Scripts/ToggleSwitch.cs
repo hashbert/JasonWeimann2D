@@ -8,6 +8,7 @@ public class ToggleSwitch : MonoBehaviour
 {
     [SerializeField] private Sprite _leftSwitch;
     [SerializeField] private Sprite _rightSwitch;
+    [SerializeField] private ToggleDirection _startingDirection = ToggleDirection.Center;
     private Sprite _centerSwitch;
     [SerializeField] private UnityEvent _onLeftSwitchPressed;
     [SerializeField] private UnityEvent _onRightSwitchPressed;
@@ -69,5 +70,10 @@ public class ToggleSwitch : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    private void OnValidate()
+    {
+        _startingDirection = _currentDirection;
     }
 }
