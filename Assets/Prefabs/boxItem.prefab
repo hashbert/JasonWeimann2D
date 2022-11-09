@@ -102,6 +102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _usedSprite: {fileID: 21300000, guid: de5e2ca45191f8d489b8185059808ea5, type: 3}
   _animator: {fileID: 0}
+  _itemPrefab: {fileID: 0}
   _item: {fileID: 3643496984168617714}
   _itemLaunchVelocity: {x: 8, y: 8, z: 0}
 --- !u!61 &750375873664307033
@@ -208,6 +209,10 @@ PrefabInstance:
     - target: {fileID: 4105475065903720878, guid: 4b99aec737bcfd448be46ce516780697, type: 3}
       propertyPath: m_Name
       value: springboardUp (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4105475065903720878, guid: 4b99aec737bcfd448be46ce516780697, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b99aec737bcfd448be46ce516780697, type: 3}
