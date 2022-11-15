@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class UIStartLevelButton : MonoBehaviour
+public partial class UIStartLevelButton : MonoBehaviour
 {
     [SerializeField] private string _levelName;
+
+    public string LevelName => _levelName;
 
     public void LoadLevel()
     {
         SceneManager.LoadScene(_levelName);
     }
+
 }
