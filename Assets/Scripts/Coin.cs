@@ -13,5 +13,7 @@ public class Coin : MonoBehaviour
         Destroy(this.gameObject);
         CoinsCollected++;
         print(CoinsCollected);
+
+        ScoreSystem.Add(100);
     }
 }
