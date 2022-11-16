@@ -6,6 +6,7 @@ public class Coin : MonoBehaviour
 {
     public static int CoinsCollected;
     AudioSource m_AudioSource;
+    [SerializeField] private AudioClip[] _audioClips;
     private void Start()
     {
         m_AudioSource = GetComponent<AudioSource>();
@@ -19,6 +20,14 @@ public class Coin : MonoBehaviour
         ScoreSystem.Add(100);
         GetComponent<Collider2D>().enabled = false;
         GetComponent<SpriteRenderer>().enabled = false;
-        m_AudioSource?.Play();
+        if (_audioClips.Length > 0)
+        {
+            int randomClip = Random.Range(0, _audioClips.Length);
+            m_AudioSource?.PlayOneShot(_audioClips[randomClip]);
+        }
+        else
+        {
+            m_AudioSource?.Play();
+        }
     }
 }
