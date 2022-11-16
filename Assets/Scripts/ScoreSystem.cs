@@ -14,5 +14,10 @@ public static class ScoreSystem
         _score += points;
         Debug.Log(_score);
         OnScoreChanged?.Invoke(_score);
+        int highscore = PlayerPrefs.GetInt("HighScore", 0);
+        if (_score > highscore)
+        {
+            PlayerPrefs.SetInt("HighScore", _score);
+        }
     }
 }
