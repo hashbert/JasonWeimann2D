@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Breakable : MonoBehaviour
 {
+    private AudioSource _audioSource;
+    private void Start()
+    {
+        _audioSource = GetComponent<AudioSource>();
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.GetComponent<Player>() == null)
@@ -15,6 +20,7 @@ public class Breakable : MonoBehaviour
 
             GetComponent<SpriteRenderer>().enabled = false;
             GetComponent<Collider2D>().enabled = false;
+            _audioSource?.Play();
         }
     }
 }

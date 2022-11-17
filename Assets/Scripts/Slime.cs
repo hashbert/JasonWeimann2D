@@ -13,9 +13,11 @@ public class Slime : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     private float _direction = -1f;
 
+    private AudioSource _audioSource;
     // Start is called before the first frame update
     void Start()
     {
+        _audioSource = GetComponent<AudioSource>();
         _rigidBody2D = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
@@ -92,6 +94,7 @@ public class Slime : MonoBehaviour
         GetComponent<Collider2D>().enabled = false;
         float alpha = 1;
         enabled = false;
+        _audioSource?.Play();
         while (alpha > 0)
         {
             alpha-=Time.deltaTime;

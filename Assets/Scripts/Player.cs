@@ -26,12 +26,14 @@ public class Player : MonoBehaviour
     private bool _isOnSlipperySurface;
     private int _layerMask;
     private string _jumpButton;
+    private AudioSource _audioSource;
 
     public int PlayerNumber => _playerNumber;
     //public int PlayerNumber { get { return _playerNumber; } } exact same as above
 
     void Start()
     {
+        _audioSource = GetComponent<AudioSource>();
         _startPosition = transform.position;
         _jumpsRemaining = _maxJumps;
         _rigidbody2D = GetComponent<Rigidbody2D>();
@@ -95,11 +97,16 @@ public class Player : MonoBehaviour
         Debug.Log($"Jumps remaining {_jumpsRemaining}");
         _fallTimer = 0;
         _jumpTimer = 0;
+
+        if (_audioSource != null) // this needs to be done like this instead of ?
+        {
+            _audioSource.Play();
+        }
     }
 
     private bool ShouldStartJump()
     {
-        
+
         return Input.GetButtonDown(_jumpButton) && _jumpsRemaining > 0;
     }
 
@@ -120,7 +127,7 @@ public class Player : MonoBehaviour
 
     private void ReadHorizontalInput()
     {
-        
+
         _horizontal = Input.GetAxis(_horizontalAxis) * _speed;
     }
 
@@ -141,7 +148,7 @@ public class Player : MonoBehaviour
 
     private void UpdateIsGrounded()
     {
-        
+
         var hit = Physics2D.OverlapCircle(_feet.position, 0.1f, _layerMask);
         _isGrounded = hit != null;
 
