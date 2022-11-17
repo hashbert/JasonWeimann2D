@@ -1254,7 +1254,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 194.15
+  m_fontSize: 118.4
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2014,7 +2014,7 @@ AudioSource:
   m_GameObject: {fileID: 1589983444}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -886976777147402179, guid: 17352a99532d81043a8b45b33bb25909, type: 2}
   m_audioClip: {fileID: 8300000, guid: dee84928c18ff1446b7cab369788d636, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
