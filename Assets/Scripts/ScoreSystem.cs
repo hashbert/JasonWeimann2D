@@ -3,21 +3,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class ScoreSystem
+public class ScoreSystem : MonoBehaviour
 {
-    private static int _score;
+    public static int Score { get; private set; }
 
     public static event Action<int> OnScoreChanged;
 
+    private void Start()
+    {
+        Score = 0;
+    }
+
     public static void Add(int points)
     {
-        _score += points;
-        Debug.Log(_score);
-        OnScoreChanged?.Invoke(_score);
+        Score += points;
+        Debug.Log(Score);
+        OnScoreChanged?.Invoke(Score);
         int highscore = PlayerPrefs.GetInt("HighScore", 0);
-        if (_score > highscore)
+        if (Score > highscore)
         {
-            PlayerPrefs.SetInt("HighScore", _score);
+            PlayerPrefs.SetInt("HighScore", Score);
         }
     }
 }
