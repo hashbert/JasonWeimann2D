@@ -29,7 +29,6 @@ public class Player : MonoBehaviour
     private int _layerMask;
     private string _jumpButton;
     private AudioSource _audioSource;
-
     public int PlayerNumber => _playerNumber;
     //public int PlayerNumber { get { return _playerNumber; } } exact same as above
 

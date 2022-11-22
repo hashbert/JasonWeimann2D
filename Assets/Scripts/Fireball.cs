@@ -4,18 +4,29 @@ using UnityEngine;
 
 public class Fireball : MonoBehaviour
 {
-    [SerializeField] private float _launchForce;
+    [SerializeField] private float _launchForce = 5f;
+    [SerializeField] private float _bounceForce = 3f;
+    private int _bouncesRemaining = 3;
+    private Rigidbody2D _rigidbody;
+
+    public float Direction { get; set; }
 
     // Start is called before the first frame update
     void Start()
     {
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        rb.velocity = Vector2.right * _launchForce;
+        _rigidbody = GetComponent<Rigidbody2D>();
+        _rigidbody.velocity = new Vector2(_launchForce * Direction, 0);
     }
-
-    // Update is called once per frame
-    void Update()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        
+        _bouncesRemaining--;
+        if (_bouncesRemaining < 0)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            _rigidbody.velocity = new Vector2(_launchForce * Direction, _bounceForce);
+        }
     }
 }
