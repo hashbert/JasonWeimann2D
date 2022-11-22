@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpringBoard : MonoBehaviour, ITakeDamage
 {
-    [SerializeField] private float _bounceVelocity = 10f;
+    [SerializeField] private float _bounceVelocity = 10f; 
     [SerializeField] private Sprite _downSprite;
     
     private SpriteRenderer _spriteRenderer;
