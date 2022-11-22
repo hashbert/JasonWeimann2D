@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Slime : MonoBehaviour
+public class Slime : MonoBehaviour, ITakeDamage
 {
     [SerializeField] private Transform _leftSensor;
     [SerializeField] private Transform _rightSensor;
@@ -35,6 +35,11 @@ public class Slime : MonoBehaviour
         {
             ScanSensor(_rightSensor);
         }
+    }
+
+    public void TakeDamage()
+    {
+        StartCoroutine(Die());
     }
 
     private void ScanSensor(Transform sensor)
@@ -80,11 +85,10 @@ public class Slime : MonoBehaviour
         print(normal);
         if (normal.y < -0.6f)
         {
-            StartCoroutine(Die());
+            TakeDamage();
         }
         else
             player.ResetToStart();
-
     }
     private IEnumerator Die()
     {

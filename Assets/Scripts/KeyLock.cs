@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class KeyLock : MonoBehaviour
 {
     [SerializeField] private UnityEvent _onUnlock;
+
     public void Unlock()
     {
         print("unlocked");

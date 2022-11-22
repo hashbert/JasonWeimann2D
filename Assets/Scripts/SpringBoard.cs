@@ -2,13 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpringBoard : MonoBehaviour
+public class SpringBoard : MonoBehaviour, ITakeDamage
 {
     [SerializeField] private float _bounceVelocity = 10f;
     [SerializeField] private Sprite _downSprite;
     
     private SpriteRenderer _spriteRenderer;
     private Sprite _upSprite;
+
+    public void TakeDamage()
+    {
+        Destroy(gameObject);
+    }
 
     private void Awake()
     {
