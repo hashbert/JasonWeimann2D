@@ -11,9 +11,12 @@ public class Player : MonoBehaviour
     [SerializeField] private float _jumpVelocity = 10f;
     [SerializeField] private int _maxJumps = 2;
     [SerializeField] private Transform _feet;
+    [SerializeField] private Transform _leftSensor;
+    [SerializeField] private Transform _rightSensor;
     [SerializeField] private float _downPull = 5f;
     [SerializeField] private float _maxJumpDuration = 0.1f;
     [SerializeField] private int _playerNumber;
+    [SerializeField] private float _wallSlideSpeed = 1f;
 
     private Vector3 _startPosition;
     private int _jumpsRemaining;
@@ -29,6 +32,7 @@ public class Player : MonoBehaviour
     private int _layerMask;
     private string _jumpButton;
     private AudioSource _audioSource;
+
     public int PlayerNumber => _playerNumber;
     //public int PlayerNumber { get { return _playerNumber; } } exact same as above
 
@@ -60,6 +64,11 @@ public class Player : MonoBehaviour
         UpdateAnimator();
         UpdateSpriteDirection();
 
+        if (ShouldSlide())
+        {
+            Slide();
+            return;
+        }
         if (ShouldStartJump())
             Jump();
         else if (ShouldContinueJump())
@@ -78,6 +87,36 @@ public class Player : MonoBehaviour
             var downForce = _downPull * _fallTimer * _fallTimer;
             _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, _rigidbody2D.velocity.y - downForce);
         }
+    }
+
+    private void Slide()
+    {
+        _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, -_wallSlideSpeed);
+    }
+
+    private bool ShouldSlide()
+    {
+        if (_isGrounded)
+        {
+            return false;
+        }
+        if (_horizontal < 0)
+        {
+            var hit = Physics2D.OverlapCircle(_leftSensor.position, 0.1f);
+            if (hit != null && hit.CompareTag("Wall"))
+            {
+                return true;
+            }
+        }
+        if (_horizontal > 0)
+        {
+            var hit = Physics2D.OverlapCircle(_rightSensor.position, 0.1f);
+            if (hit != null && hit.CompareTag("Wall"))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void ContinueJump()
@@ -145,6 +184,7 @@ public class Player : MonoBehaviour
         bool walking = _horizontal != 0;
         _animator.SetBool("Walk", walking);
         _animator.SetBool("Jump", ShouldContinueJump());
+        _animator.SetBool("Slide", ShouldSlide());
     }
 
     private void UpdateIsGrounded()
