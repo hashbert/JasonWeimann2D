@@ -14656,9 +14656,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 513270542}
     - target: {fileID: 3276445976855831960, guid: 8a3f7c334fd2dc84b99d4dcf728ac224, type: 3}
+      propertyPath: _airBreaking
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3276445976855831960, guid: 8a3f7c334fd2dc84b99d4dcf728ac224, type: 3}
       propertyPath: _rightSensor
       value: 
       objectReference: {fileID: 1586464336}
+    - target: {fileID: 3276445976855831960, guid: 8a3f7c334fd2dc84b99d4dcf728ac224, type: 3}
+      propertyPath: _acceleration
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3276445976855831960, guid: 8a3f7c334fd2dc84b99d4dcf728ac224, type: 3}
+      propertyPath: _deceleration
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3276445976855831960, guid: 8a3f7c334fd2dc84b99d4dcf728ac224, type: 3}
+      propertyPath: _airAcceleration
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3276445976855831961, guid: 8a3f7c334fd2dc84b99d4dcf728ac224, type: 3}
       propertyPath: m_RootOrder
       value: 3

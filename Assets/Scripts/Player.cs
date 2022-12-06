@@ -17,6 +17,10 @@ public class Player : MonoBehaviour
     [SerializeField] private float _maxJumpDuration = 0.1f;
     [SerializeField] private int _playerNumber;
     [SerializeField] private float _wallSlideSpeed = 1f;
+    [SerializeField] private float _acceleration = 1f;
+    [SerializeField] private float _deceleration = 1f;
+    [SerializeField] private float _airBreaking = 1f;
+    [SerializeField] private float _airAcceleration = 1f;
 
     private Vector3 _startPosition;
     private int _jumpsRemaining;
@@ -168,10 +172,16 @@ public class Player : MonoBehaviour
 
     private void MoveHorizontal()
     {
+        float smoothnessMultiplier = _horizontal == 0 ? _acceleration : _deceleration;
+        if (_isGrounded == false)
+        {
+            smoothnessMultiplier = _horizontal == 0 ? _airBreaking : _airAcceleration;
+        }
+
         float newHorizontal = Mathf.Lerp(
             _rigidbody2D.velocity.x, 
-            _horizontal * _speed,
-            Time.deltaTime);
+            _horizontal * smoothnessMultiplier,
+            Time.deltaTime * smoothnessMultiplier);
 
         _rigidbody2D.velocity = new Vector2(newHorizontal, _rigidbody2D.velocity.y);
     }
