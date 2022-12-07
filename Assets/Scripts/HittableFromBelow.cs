@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class HittableFromBelow : MonoBehaviour
+public abstract class HittableFromBelow : MonoBehaviour
 {
     [SerializeField] protected Sprite _usedSprite;
     [SerializeField] private Animator _animator;
@@ -26,9 +26,7 @@ public class HittableFromBelow : MonoBehaviour
             {
                 GetComponent<SpriteRenderer>().sprite = _usedSprite;
             }
-
         }
-
     }
 
     private void PlayAnimation()
@@ -40,8 +38,5 @@ public class HittableFromBelow : MonoBehaviour
         }
     }
 
-    protected virtual void Use()
-    {
-        print($"Used {gameObject.name}");
-    }
+    protected abstract void Use();
 }

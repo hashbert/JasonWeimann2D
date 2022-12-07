@@ -26,7 +26,6 @@ public class ItemBox : HittableFromBelow
             transform.position + Vector3.up, 
             Quaternion.identity, 
             transform);
-        base.Use();
         _used = true;
         _item.SetActive(true);
         var itemRigidbody = _item.GetComponent<Rigidbody2D>();
